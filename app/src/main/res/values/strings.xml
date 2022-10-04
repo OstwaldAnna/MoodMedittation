@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Meditation</string>
+    <string name="title_activity_tab_bar">TabBar</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_navigation">navigation</string>
+    <string name="onboarding_register">Еще нет аккаунта? Зарегистрируйтесь</string>
+    <string name="onboarding_content">Наслаждайся отборочными. \nБудь внимателен. \nДелай хорошо.</string>
+    <string name="onboarding_button_signin">Войти в аккаунт</string>
+    <string name="onboarding_image_flower">flower</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="tv_register">Register</string>
+    <string name="btn_profile">Профиль</string>
+    <string name="login_title">Sing in</string>
+    <string name="password_hint">Пароль</string>
+    <string name="email_hint">Email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hamburger">Hamburger</string>
+    <string name="user">User</string>
+    <string name="no_user_input">Введите логин</string>
+</resources>
