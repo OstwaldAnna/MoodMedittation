@@ -41,10 +41,6 @@
         <activity
             android:name=".Main"
             android:exported="true" />
-        <activity
-            android:name=".HorizontalRecycleView"
-            android:exported="true">
-        </activity>
     </application>
 
 </manifest>
