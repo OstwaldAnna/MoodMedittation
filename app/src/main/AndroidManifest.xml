@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.meditation">
-
-<!--    Разрешаем подключение к интеренету-->
+    <!-- Разрешаем подключение к интеренету -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,8 +14,8 @@
         android:roundIcon="@mipmap/applicon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
         <activity
             android:name=".Profile"
             android:exported="false">
@@ -35,6 +34,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

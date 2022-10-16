@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
 
         }
 
+
     }
 
     @Override
@@ -68,5 +69,8 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }
+
+
+
 
 
