@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="2dp"
     app:cardCornerRadius="12dp"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_cat" />
+            app:srcCompat="@drawable/ic_aaaa" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -24,11 +26,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:background="#595959"
             android:gravity="center"
-            android:text="Text Is This"
-            android:textColor="@color/white"
+            android:text="kfmvkfmc"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
