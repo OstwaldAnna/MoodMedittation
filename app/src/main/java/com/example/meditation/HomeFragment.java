@@ -71,16 +71,19 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv = (RecyclerView) getView().findViewById(R.id.horizontalFragmentHome);
+
         dataSource = new ArrayList<>();
         dataSource.add(new Feeling("хз","gyhujik"));
-        dataSource.add(new Feeling("хз","jk"));
-        dataSource.add(new Feeling("хз","gggg"));
-        dataSource.add(new Feeling("хз","tiuore"));
-        dataSource.add(new Feeling("хз","tiuore"));
+//        dataSource.add(new Feeling("хз","jk"));
+//        dataSource.add(new Feeling("хз","gggg"));
+//        dataSource.add(new Feeling("хз","tiuore"));
+//        dataSource.add(new Feeling("хз","tiuore"));
 
+        responseData();
 
-        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         myRvAdapter = new HomeFragment.MyAdapter(dataSource);
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(myRvAdapter);
     }
@@ -140,15 +143,17 @@ public class HomeFragment extends Fragment {
         }
     }
     private void responseData(){
-        String url = "http://mskko2021.mad.hakta.pro/api/user/feelings";
+        String url = "http://mskko2021.mad.hakta.pro/api/feelings";
         RequestQueue mRequestQueue = Volley.newRequestQueue(getContext()); // очередь запросов
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    response.getJSONArray("data");
-                    for (int i = 0; i < response.length(); i++){
-                        //dataSource.add(new Feeling(response.getString("title"), response.getString("image")));
+
+                    JSONArray res = response.getJSONArray("data");
+                    for (int i = 0; i < res.length(); i++){
+                        HomeFragment.this.dataSource.add(new Feeling(res.getJSONObject(i).getString("image"),
+                                res.getJSONObject(i).getString("title")));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
