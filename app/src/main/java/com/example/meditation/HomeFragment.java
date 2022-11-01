@@ -1,6 +1,8 @@
 package com.example.meditation;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,10 +24,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,16 +76,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rv = (RecyclerView) getView().findViewById(R.id.horizontalFragmentHome);
-
-        dataSource = new ArrayList<>();
-        dataSource.add(new Feeling("хз","gyhujik"));
-//        dataSource.add(new Feeling("хз","jk"));
-//        dataSource.add(new Feeling("хз","gggg"));
-//        dataSource.add(new Feeling("хз","tiuore"));
-//        dataSource.add(new Feeling("хз","tiuore"));
-
         responseData();
+        rv = (RecyclerView) getView().findViewById(R.id.horizontalFragmentHome);
+        //dataSource = Profile.dataSource;
+        dataSource = new ArrayList<>();
 
         myRvAdapter = new HomeFragment.MyAdapter(dataSource);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -125,6 +125,15 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyAdapter.MyHolder holder, int position) {
             holder.tvTitle.setText(data.get(position).getTitle());
+            Picasso.get().load(data.get(position).getImg()).resize(125,125)
+                    .into(holder.imageView);
+//            try {
+//                URL url = new  URL(data.get(position).getImg());
+//                Bitmap img = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//                holder.imageView.setImageBitmap(img);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
         @Override
@@ -139,30 +148,27 @@ public class HomeFragment extends Fragment {
             public MyHolder(@NonNull View itemView) {
                 super(itemView);
                 tvTitle = itemView.findViewById(R.id.tvTitle);
+                imageView = itemView.findViewById(R.id.imageView2);
             }
         }
     }
-    private void responseData(){
+
+    private void responseData() {
         String url = "http://mskko2021.mad.hakta.pro/api/feelings";
         RequestQueue mRequestQueue = Volley.newRequestQueue(getContext()); // очередь запросов
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-
-                    JSONArray res = response.getJSONArray("data");
-                    for (int i = 0; i < res.length(); i++){
-                        HomeFragment.this.dataSource.add(new Feeling(res.getJSONObject(i).getString("image"),
-                                res.getJSONObject(i).getString("title")));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONArray res = response.getJSONArray("data");
+                for (int i = 0; i < res.length(); i++){
+                    System.out.println(res.getJSONObject(i).getString("title"));
+                    dataSource.add(new Feeling(res.getJSONObject(i).getString("image"),
+                            res.getJSONObject(i).getString("title")));
                 }
+                myRvAdapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
+        }, error -> {
         });
         mRequestQueue.add(request);
     }

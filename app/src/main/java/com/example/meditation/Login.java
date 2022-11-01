@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        btn_signIn.setOnClickListener(v -> startActivity(new Intent(this, Main.class)));
 
 //        btn_signIn.setOnClickListener(view -> {
 //            if(et_email.getText().toString().contains("@") && !et_password.getText().toString().equals("")) {
@@ -78,7 +79,7 @@ public class Login extends AppCompatActivity {
 //                Toast.makeText(Login.this, R.string.no_user_input,Toast.LENGTH_LONG).show();
 //            }
 //        });
-        btn_signIn.setOnClickListener(v -> startActivity(new Intent(this, Main.class)));
+
     }
 
 

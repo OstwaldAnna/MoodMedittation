@@ -36,17 +36,7 @@ public class Main extends AppCompatActivity {
             return true;
         });
 
-        bindingBottom.topNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.hamburger:
-                    replaceFragment(new humburgerFragment());
-                    break;
-                case R.id.user:
-                    replaceFragment(new UserFragment());
-                    break;
-            }
-            return true;
-        });
+
     }
 
     private void replaceFragment(Fragment fragment){
